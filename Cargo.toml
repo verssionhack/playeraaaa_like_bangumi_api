@@ -1,0 +1,20 @@
+[package]
+name = "playeraaaa_like_bangumi_api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+m3u8utils = { version = "0.1.0", path = "../m3u8utils" }
+reqwest = { version = "0.11.18", features = ["socks", "json", "blocking"] }
+tokio = { version = "1.29.1", features = ["full"] }
+timer = { path = "../timer" }
+size_utils = { version = "0.1.0", path = "../size_utils" }
+rust-crypto = "0.2.36"
+base64 = "0.21.2"
+regex = "1.9.1"
+serde_json = "1.0.104"
+serde = { version = "1.0.181", features = ["derive"] }
+lazy_static = "1.4.0"
+
