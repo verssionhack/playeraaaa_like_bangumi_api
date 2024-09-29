@@ -6,11 +6,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-m3u8utils = { version = "0.1.0", path = "../m3u8utils" }
+#m3u8utils = { git = "https://github.com/verssionhack/m3u8utils.git" }
+#size_utils = { git = "https://github.com/verssionhack/size_utils.git" }
+#timer = { git = "https://github.com/verssionhack/timer.git" }
+m3u8utils = { path = "../m3u8utils" }
+size_utils = { path = "../size_utils" }
+timer = { path = "../timer" }
+
 reqwest = { version = "0.11.18", features = ["socks", "json", "blocking"] }
 tokio = { version = "1.29.1", features = ["full"] }
-timer = { path = "../timer" }
-size_utils = { version = "0.1.0", path = "../size_utils" }
 rust-crypto = "0.2.36"
 base64 = "0.21.2"
 regex = "1.9.1"

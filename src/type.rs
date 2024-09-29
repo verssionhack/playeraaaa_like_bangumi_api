@@ -36,10 +36,10 @@ pub struct PlayerMetadata {
 impl PlayerMetadata {
     pub fn get_m3u8_url(&self, txt: String) -> String {
         let getvideo_matcher = regex::Regex::new(r#"getVideoInfo\("(?<m3u8_url>.*)"\)"#).unwrap();
-        let token_iv_matcher = regex::Regex::new("var le_token *= *\"(?<token_iv>.*)\";").unwrap();
+        let token_iv_matcher = regex::Regex::new("var bt_token *= *\"(?<token_iv>.*)\";").unwrap();
         let url = getvideo_matcher.captures(&txt)
             .unwrap().name("m3u8_url").unwrap();
-        let token_key = b"A42EAC0C2B408472";
+        let token_key = b"7692AA70EEF92B42";
         let token_iv = token_iv_matcher.captures(&txt)
             .unwrap().name("token_iv").unwrap();
         get_url(url.as_str(), token_key, token_iv.as_str().as_bytes()).unwrap()

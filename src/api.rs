@@ -102,12 +102,14 @@ impl Api {
             .text()
             .await
             .ok()?;
+
         let player_aaaa_matcher =
             regex::Regex::new(r".*var player_aaaa *= *(?P<data>\{.*\}).*?").ok()?;
         let player_aaaa: PlayerMetadata =
             serde_json::from_str(player_aaaa_matcher.captures(&res)?.name("data")?.as_str())
                 .ok()?;
-        let url = "https://bf.sbdm.cc/m3u8.php";
+
+        let url = "https://bf.bfdm.xyz/m3u8.php";
         let res = self
             .client
             .get(url)
@@ -119,6 +121,7 @@ impl Api {
             .text()
             .await
             .ok()?;
+
         Some(player_aaaa.get_m3u8_url(res))
     }
 

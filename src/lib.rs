@@ -12,14 +12,14 @@ mod tests {
     fn test_url() {
         let event_loop = tokio::runtime::Runtime::new().unwrap();
         let api = api::Api::builder()
-            .proxy(Some(Proxy::all("http://localhost:15777").unwrap()))
-            .host(Some("https://mikudm.com"))
+//            .proxy(Some(Proxy::all("http://192.168.31.1:15777").unwrap()))
+            .host(Some("https://www.dmmiku.com"))
             .build();
         event_loop.block_on(async {
-            for i in 1..=23 {
+            for i in 6..=12 {
                 let file_name = format!("/home/kurumin/tmp/playeraaaa_test_dir/{}.m3u8", i);
                 let res = loop {
-                    let url = api.download_url_form(1444, 1, i).await.unwrap();
+                    let url = api.download_url_form(1025, 1, i).await.unwrap();
                     println!("[{i}]{}", &url);
                     let txt = api
                         .client()
@@ -45,20 +45,21 @@ mod tests {
     fn test_metadata() {
         let event_loop = tokio::runtime::Runtime::new().unwrap();
         let api = api::Api::builder()
-            .proxy(Some(Proxy::all("http://localhost:15777").unwrap()))
-            .host(Some("https://www.lldm.net"))
+            .proxy(Some(Proxy::all("http://192.168.31.1:15777").unwrap()))
+            .host(Some("https://www.dmmiku.com"))
             .build();
         //println!("{:?}", api.unpack_url("https://www.lldm.net/index.php/vod/play/id/1617/sid/1/nid/30.html#"));
         event_loop.block_on(async {
-            let mut metadata = Some(api.metadata(2549).await.unwrap());
+            let mut metadata = Some(api.metadata(963).await.unwrap());
             let mut link = metadata.unwrap().link_next;
+            println!("{:?}", link);
             loop {
                 if let Some(link_next) = link {
                     println!("{}", &link_next);
                     let (id, sid, nid) = api.unpack_url(link_next);
                     let download_url = api.download_url_form(id, sid, nid).await;
                     println!("{:?}", download_url);
-                    metadata = Some(api.metadata_index(2549, nid).await.unwrap());
+                    metadata = Some(api.metadata_index(963, nid).await.unwrap());
                     link = metadata.unwrap().link_next;
                 } else {
                     break;
